@@ -1,12 +1,9 @@
-export default function AllChargers() {
+import Carddisplay from "../components/Carddisplay"
+
+export default function AllChargers({stations}) {
     return (
         <>
-
-        <h1>All Chargers Page</h1>
-        
-        
-        
-        
+            <Carddisplay stations={stations}/>
         </>
     )
 }
