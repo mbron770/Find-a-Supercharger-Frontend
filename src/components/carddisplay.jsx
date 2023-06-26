@@ -1,23 +1,25 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import CardGroup from "react-bootstrap/CardGroup";
+//import Card from "react-bootstrap/Card";
+import Individualcard from './individualcard'
 
-const URL = 'http://localhost:3000/fuel_stations';
-
-export default function Carddisplay() {
-
-  const [stations, setStations] = useState([]);
-
-  useEffect(() => {
-    fetch(URL)
-      .then(response => response.json())
-      .then(data => setStations(data));
-  }, []);
-
-  console.log (stations)
+export default function Carddisplay({stations}) {
   
+  console.log(stations);
+
   return (
-    <>   
-      <h1>card display</h1>
+    <>
+      <br></br>
+      <CardGroup
+        style={{
+          height: "25vh",
+          marginLeft: "100px",
+          marginRight: "100px",
+        }}
+      > 
+        <Individualcard stations = {stations}/>
+
+      </CardGroup>
     </>
   );
-} 
+}

@@ -1,7 +1,8 @@
 import React from 'react';
 import Map from './map';
 import { useState,useEffect } from 'react';
-import Carddisplay from './Carddisplay';
+import Carddisplay from './carddisplay';
+
 
 const URL = 'http://localhost:3000/fuel_stations';
 
@@ -16,9 +17,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="ui raised segment">
-      {/* <Header /> */}
+    <>
       <Map stations={stations}/>
-    </div>
+      
+    </>
   );
 }

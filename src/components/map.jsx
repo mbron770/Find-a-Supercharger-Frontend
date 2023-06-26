@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import Carddisplay from "./carddisplay";
 
 
 const URL = 'http://localhost:3000/fuel_stations';
@@ -132,6 +133,8 @@ function Map({stations}) {
         </InfoWindow>
       )}
     </GoogleMap>
+
+    
   );
 }
 
