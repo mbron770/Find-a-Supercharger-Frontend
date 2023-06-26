@@ -1,7 +1,11 @@
+import React from 'react';
+import Map from './map';
+
 export default function App() {
   return (
-    <>
-      <h1>home page</h1>
-    </>
+    <div className="ui raised segment">
+      {/* <Header /> */}
+      <Map />
+    </div>
   );
 }
