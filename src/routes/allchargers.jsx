@@ -1,9 +1,39 @@
 import Carddisplay from "../components/Carddisplay"
+import { useEffect,useState } from "react";
 
-export default function AllChargers({stations}) {
+const URL = 'http://localhost:3000/fuel_stations';
+
+export default function AllChargers() {
+    const [stations, setStations] = useState([]);
+    const [currentLocation, setCurrentLocation] = useState(null);
+    const [isLocationLoaded, setLocationLoaded] = useState(false);
+
+    useEffect(() => {
+        fetch(URL)
+          .then(response => response.json())
+          .then(data => setStations(data));
+      }, []);
+    
+      useEffect(() => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              setCurrentLocation({ lat: latitude, lng: longitude });
+              setLocationLoaded(true);
+            },
+            (error) => {
+              console.error("Error getting current location:", error);
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported by this browser.");
+        }
+      }, []);
+
     return (
         <>
-            <Carddisplay stations={stations}/>
+            <Carddisplay stations={stations} currentLocation={currentLocation} isLocationLoaded={isLocationLoaded} setStations={setStations}/>
         </>
     )
 }

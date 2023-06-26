@@ -1,7 +1,6 @@
 import React from 'react';
 import Map from './map';
 import { useState,useEffect } from 'react';
-import Carddisplay from './Carddisplay';
 
 const URL = 'http://localhost:3000/fuel_stations';
 
