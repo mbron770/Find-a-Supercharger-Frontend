@@ -10,7 +10,17 @@ import Root from './routes/root';
 import App from './components/app';
 import AllChargers from './routes/allchargers';
 import Reviews from './routes/reviews';
+import { useState, useEffect } from 'react';
 
+const URL = 'http://localhost:3000/fuel_stations';
+
+// const [stations, setStations] = useState([]);
+
+// useEffect(() => {
+//   fetch(URL)
+//     .then(response => response.json())
+//     .then(data => setStations(data));
+// }, []);
 
 const router = createBrowserRouter([
   {

@@ -4,23 +4,23 @@ import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 
 const URL = 'http://localhost:3000/fuel_stations';
 
-function Map() {
+function Map({stations}) {
   const containerStyle = {
-    width: "100%",
-    height: "650px",
+    width: "100vw",
+    height: "96vh",
   };
   
-  const [stations, setStations] = useState([]);
+  // const [stations, setStations] = useState([]);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [selectedStation, setSelectedStation] = useState(null);
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
 
-  useEffect(() => {
-    fetch(URL)
-      .then(response => response.json())
-      .then(data => setStations(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch(URL)
+  //     .then(response => response.json())
+  //     .then(data => setStations(data));
+  // }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {

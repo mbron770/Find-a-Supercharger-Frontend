@@ -1,11 +1,24 @@
 import React from 'react';
 import Map from './map';
+import { useState,useEffect } from 'react';
+import Carddisplay from './Carddisplay';
+
+const URL = 'http://localhost:3000/fuel_stations';
 
 export default function App() {
+
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    fetch(URL)
+      .then(response => response.json())
+      .then(data => setStations(data));
+  }, []);
+
   return (
     <div className="ui raised segment">
       {/* <Header /> */}
-      <Map />
+      <Map stations={stations}/>
     </div>
   );
 }
