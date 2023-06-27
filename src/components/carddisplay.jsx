@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Individualcard from "./Individualcard"
 
-function CardDisplay({ stations, currentLocation, isLocationLoaded }) {
+function CardDisplay({ stations, currentLocation, isLocationLoaded, setStations }) {
   const calculateDistances = () => {
     const yourLatitude = currentLocation.lat;
     const yourLongitude = currentLocation.lng;
@@ -49,11 +49,12 @@ function CardDisplay({ stations, currentLocation, isLocationLoaded }) {
   return (
     <div>
       {closestStations.map(station => (
-        <Individualcard key={uuidv4()} station={station}/>
-        // <div key={uuidv4()}>
-        //   <p>Station: {station.station_name}</p>
-        //   {station.distance && <p>Distance: {station.distance.toFixed(2)} miles</p>}
-        // </div>
+        <Individualcard
+          key={uuidv4()}
+          station={station}
+          stations={stations}
+          setStations={setStations}
+        />
       ))}
     </div>
   );
