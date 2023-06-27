@@ -1,41 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Individualcard from "./Individualcard"
 
-
-function CardDisplay({stations,currentLocation,isLocationLoaded,setStations}) {
-
-  useEffect(() => {
-    if (isLocationLoaded && currentLocation) {
-      calculateDistances();
-    }
-  }, [isLocationLoaded, currentLocation]);
-
+function CardDisplay({ stations, currentLocation, isLocationLoaded }) {
   const calculateDistances = () => {
     const yourLatitude = currentLocation.lat;
     const yourLongitude = currentLocation.lng;
 
-    const updatedStations = stations.map(station => {
-      const stationLatitude = station.latitude;
-      const stationLongitude = station.longitude;
+    return stations
+      .map(station => {
+        const stationLatitude = station.latitude;
+        const stationLongitude = station.longitude;
 
-      const distance = calculateDistance(
-        yourLatitude,
-        yourLongitude,
-        stationLatitude,
-        stationLongitude
-      );
-        
-      return {
-        ...station,
-        distance: distance
-      };
-    });
+        const distance = calculateDistance(
+          yourLatitude,
+          yourLongitude,
+          stationLatitude,
+          stationLongitude
+        );
 
-    updatedStations.sort((a, b) => a.distance - b.distance);
-    setStations(updatedStations);
+        return {
+          ...station,
+          distance: distance
+        };
+      })
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 30);
   };
 
-  function calculateDistance (lat1, lon1, lat2, lon2) {
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 3959; // Radius of the Earth in miles
     const dLat = deg2rad(lat2 - lat1);
     const dLon = deg2rad(lon2 - lon1);
@@ -51,16 +44,19 @@ function CardDisplay({stations,currentLocation,isLocationLoaded,setStations}) {
     return deg * (Math.PI / 180);
   };
 
+  const closestStations = isLocationLoaded && currentLocation ? calculateDistances() : [];
+
   return (
     <div>
-      {stations.map(station => (
-        <div key={uuidv4()}>
-          <p>Station: {station.station_name}</p>
-          {station.distance && <p>Distance: {station.distance.toFixed(2)} miles</p>}
-        </div>
+      {closestStations.map(station => (
+        <Individualcard key={uuidv4()} station={station}/>
+        // <div key={uuidv4()}>
+        //   <p>Station: {station.station_name}</p>
+        //   {station.distance && <p>Distance: {station.distance.toFixed(2)} miles</p>}
+        // </div>
       ))}
     </div>
   );
-};
+}
 
 export default CardDisplay;
