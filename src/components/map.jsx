@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
-import Carddisplay from "./carddisplay";
+import { GoogleMap, Marker, InfoWindowF } from "@react-google-maps/api";
 
 
 const URL = 'http://localhost:3000/fuel_stations';
@@ -10,18 +9,11 @@ function Map({stations}) {
     width: "100vw",
     height: "96vh",
   };
-  
-  // const [stations, setStations] = useState([]);
+
   const [currentLocation, setCurrentLocation] = useState(null);
   const [selectedStation, setSelectedStation] = useState(null);
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
-
-  // useEffect(() => {
-  //   fetch(URL)
-  //     .then(response => response.json())
-  //     .then(data => setStations(data));
-  // }, []);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -110,7 +102,7 @@ function Map({stations}) {
         />
       ))}
       {selectedStation && (
-        <InfoWindow
+        <InfoWindowF
           position={{
             lat: selectedStation.latitude,
             lng: selectedStation.longitude,
@@ -130,11 +122,9 @@ function Map({stations}) {
             )}
             <button onClick={handleGetDirections}>Get Directions</button>
           </div>
-        </InfoWindow>
+        </InfoWindowF>
       )}
     </GoogleMap>
-
-    
   );
 }
 
