@@ -4,7 +4,6 @@ import Individualcard from "./Individualcard";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-
 function CardDisplay({
   stations,
   currentLocation,
@@ -61,15 +60,15 @@ function CardDisplay({
   return (
     <div>
       <br></br>
-      
-    <Row
+
+      <Row
         xs={1}
-        md={3}
+        md={4}
         className="g-4"
         style={{
           marginLeft: "100px",
           marginRight: "100px",
-          display: 'flex'
+          display: "flex",
         }}
       >
         {closestStations.map((station) => (
@@ -81,23 +80,21 @@ function CardDisplay({
                 height: "100%",
               }}
             >
-            <Individualcard
-              key={station.id}
-              station={station}
-              stations={stations}
-              setStations={setStations}
-            />
+              <Individualcard
+                key={station.id}
+                station={station}
+                stations={stations}
+                setStations={setStations}
+                stationLatitude={station.latitude}
+                stationLongitude={station.longitude}
+              />
             </div>
           </Col>
         ))}
       </Row>
       <br></br>
-
-    
-      
     </div>
   );
 }
 
 export default CardDisplay;
-

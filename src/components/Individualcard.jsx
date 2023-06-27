@@ -1,17 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Accordion from "react-bootstrap/Accordion";
 import Badge from "react-bootstrap/Badge";
-import Stack from "react-bootstrap/Stack";
+import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import { GoogleMap, Marker, InfoWindowF } from "@react-google-maps/api";
 
 const URL = "http://localhost:3000/fuel_stations";
 
-export default function Individualcard({ station, stations, setStations }) {
+export default function Individualcard({
+  station,
+  stations,
+  setStations,
+  stationLatitude,
+  stationLongitude,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [selectedStation, setSelectedStation] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [duration, setDuration] = useState(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Error getting current location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedStation && currentLocation) {
+      const directionsService = new window.google.maps.DirectionsService();
+      const request = {
+        origin: currentLocation,
+        destination: {
+          lat: stationLatitude,
+          lng: stationLongitude,
+        },
+        travelMode: "DRIVING",
+        drivingOptions: {
+          departureTime: new Date(),
+        },
+      };
+      directionsService.route(request, handleDirectionsResponse);
+    }
+  }, [selectedStation, currentLocation]);
+
+  const i = [stationLatitude, stationLongitude];
+  console.log(i);
+
+  function handleDirectionsResponse(response, status) {
+    if (status === "OK") {
+      const leg = response.routes[0].legs[0];
+      setDistance(leg.distance.text);
+      setDuration(leg.duration.text);
+    } else {
+      console.error("Directions request failed:", status);
+      setDistance(null);
+      setDuration(null);
+    }
+  }
+
+  function handleGetDirections(stationLatitude, stationLongitude) {
+    if (currentLocation) {
+      const origin = `${currentLocation.lat},${currentLocation.lng}`;
+      const destination = `${stationLatitude},${stationLongitude}`;
+      const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
+      window.open(directionsUrl, "_blank");
+    }
+  }
 
   function handleCommentChange(event) {
     setComment(event.target.value);
@@ -64,7 +135,19 @@ export default function Individualcard({ station, stations, setStations }) {
       });
 
     setShowModal(false);
+    setComment("");
   }
+  const containerStyle = {
+    width: "100%",
+    height: "25vh",
+  };
+
+  const desitantionMarkers = {
+    lat: stationLatitude,
+    lng: stationLongitude,
+  };
+
+  console.log(desitantionMarkers);
 
   return (
     <>
@@ -75,7 +158,8 @@ export default function Individualcard({ station, stations, setStations }) {
             fontSize: "22px",
             fontFamily: "Helvetica Neue",
             fontStyle: "normal",
-            // fontWeight: "Bold",
+            backgroundColor: "black",
+            color: "white",
           }}
         >
           {" "}
@@ -83,20 +167,26 @@ export default function Individualcard({ station, stations, setStations }) {
         </Card.Header>
 
         <Card.Body>
-          <iframe
-            title="Google Map"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12097.33410972836!2d-74.0182606!3d40.7106737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1687553644224!5m2!1sen!2sus"
-            width="100%"
-            height="300"
-            // style={{ border: }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-          
-          {/* <Map/> */}
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={desitantionMarkers}
+            zoom={15}
+          >
+            {currentLocation && (
+              <Marker
+                position={desitantionMarkers}
+                title="Station"
+                onClick={(e) =>
+                  handleGetDirections(stationLatitude, stationLongitude)
+                }
+              />
+            )}
+          </GoogleMap>
           {"\u00A0"}
-          <Card.Title>{station.street_address}</Card.Title>
+          <Card.Title>{`${station.street_address}`}</Card.Title>
+          <Card.Title>{`${station.city}, ${station.state} ${station.zip}`}</Card.Title>
+          
+          {console.log(station)}
           <br></br>
           <Card.Subtitle>
             <span style={{ fontSize: "16px", fontWeight: "bold" }}>Access</span>
@@ -140,58 +230,83 @@ export default function Individualcard({ station, stations, setStations }) {
                 </Badge>
               </Accordion.Header>
               <Accordion.Body>
-                {station.comments && station.comments.length > 0
-                  ? station.comments.join("\n")
-                  : "No Reviews yet..."}
+                {station.comments && station.comments.length > 0 ? (
+                  station.comments.map((comment) => (
+                    <Alert variant="dark">
+                      <Col xs={2} md={2}></Col>
+                      <Image src="./thumbnail.png" circle />
+                      {"\u00A0" + "\u00A0"}
+                      {comment}
+                    </Alert>
+                  ))
+                ) : (
+                  <Alert variant="danger">No Reviews Yet</Alert>
+                )}
                 <br></br>
                 <br></br>
-                <Button variant="secondary" onClick={handleAddReview}>
-                  Add Review
-                </Button>{" "}
+                <div className="d-grid gap-2">
+                  <Button
+                    variant="dark"
+                    onClick={handleAddReview}
+                    direction="horizontal"
+                    justify="center"
+                  >
+                    Add Review
+                  </Button>{" "}
+                </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          {/* <Card.Text style={{ whiteSpace: "pre-line" }}>
-            {station.comments && station.comments.length > 0
-              ? station.comments.join("\n")
-              : "No Review yet..."}
-          </Card.Text> */}
           <br></br>
-          <Button variant="primary">Get Direction</Button>{" "}
-        </Card.Body>
 
-        {/* <Card.Footer>
-          <small className="text-muted">asd</small>
-        </Card.Footer> */}
+          <div className="d-grid gap-2">
+            <Button
+              variant="dark"
+              onClick={(e) =>
+                handleGetDirections(stationLatitude, stationLongitude)
+              }
+            >
+              Get Directions
+            </Button>{" "}
+          </div>
+        </Card.Body>
       </Card>
 
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Add Review</Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a Review
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h4>Your Review</h4>
           <Form>
             <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Text:</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
                 value={comment}
                 onChange={handleCommentChange}
+                placeholder="Type Something..."
               />
-            </Form.Group>
-       1   </Form>
+            </Form.Group>{" "}
+          </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Cancel
+          <Button variant="dark" onClick={handleAddComment}>
+            Submit
           </Button>
-          <Button variant="primary" onClick={handleAddComment}>
-            Save
+          <Button variant="dark" onClick={handleCloseModal}>
+            Cancel
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 }
-
