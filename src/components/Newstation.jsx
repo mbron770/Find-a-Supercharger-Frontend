@@ -7,9 +7,12 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 
-const stateAbbreviations = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", 
-                            "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", 
-                            "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
+const stateAbbreviations = [
+  "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID",
+  "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS",
+  "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK",
+  "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+];
 
 function Newstation() {
   const [stationName, setStationName] = useState("");
@@ -466,11 +469,7 @@ function Newstation() {
               onChange={(e) => setChargerType(e.target.value)}
               style={{ width: "100%" }}
               required={!!chargerType.length}
-              isInvalid={
-                chargerType.length > 0 &&
-                !isNaN(parseFloat(chargerType)) &&
-                isFinite(chargerType)
-              }
+              isInvalid={!chargerType}
             />
             <Form.Control.Feedback type="invalid">
               Please Enter a Type

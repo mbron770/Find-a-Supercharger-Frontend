@@ -3,10 +3,13 @@ import { v4 as uuidv4 } from "uuid";
 import Individualcard from "./individualcard";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 import Search from "./search";
 
 function CardDisplay({
@@ -15,10 +18,10 @@ function CardDisplay({
   isLocationLoaded,
   setStations,
 }) {
-  const a ={...currentLocation}
-  const [address, setAddress] = useState('');
-  const [lat,setLat] = useState(a.lat)
-  const [lng,setLng] = useState(a.lng)
+  const a = { ...currentLocation };
+  const [address, setAddress] = useState("");
+  const [lat, setLat] = useState(a.lat);
+  const [lng, setLng] = useState(a.lng);
 
   useEffect(() => {
     if (currentLocation) {
@@ -27,7 +30,7 @@ function CardDisplay({
     }
   }, [currentLocation]);
 
-  console.log (address)
+  console.log(address);
 
   // useEffect(() => {
   //   if (address) {
@@ -86,37 +89,41 @@ function CardDisplay({
     isLocationLoaded && currentLocation ? calculateDistances() : [];
 
   const handleAddressSelect = async (selectedAddress) => {
-
     setAddress(selectedAddress);
 
     try {
-        const results = await geocodeByAddress(selectedAddress);
-        const selectedLocation = await getLatLng(results[0]);
-        const { lat, lng } = selectedLocation;
-        console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-        setLat(lat)
-        setLng(lng)
-        const addressArr = selectedAddress.split(', ')
+      const results = await geocodeByAddress(selectedAddress);
+      const selectedLocation = await getLatLng(results[0]);
+      const { lat, lng } = selectedLocation;
+      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+      setLat(lat);
+      setLng(lng);
+      const addressArr = selectedAddress.split(", ");
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
 
-        } catch (error) {
-            console.log('Error:', error);
-        }
-    };
-
-    function handleAddressChange (selectedAddress) {
-      //console.log(address,"   parent")
-      if (address.length === 1) {
-        //console.log ("DONE")
-        setLat(currentLocation.lat);
-        setLng(currentLocation.lng);
-      }
-      setAddress((prevAddr) => selectedAddress);
-    };
+  function handleAddressChange(selectedAddress) {
+    //console.log(address,"   parent")
+    if (address.length === 1) {
+      //console.log ("DONE")
+      setLat(currentLocation.lat);
+      setLng(currentLocation.lng);
+    }
+    setAddress((prevAddr) => selectedAddress);
+  }
 
   return (
     <div>
-      <br></br><br></br><br></br>
-      <Search handleAddressChange={handleAddressChange} address={address} handleAddressSelect={handleAddressSelect}/>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Search
+        handleAddressChange={handleAddressChange}
+        address={address}
+        handleAddressSelect={handleAddressSelect}
+      />
       <br></br>
       <Row
         xs={1}
