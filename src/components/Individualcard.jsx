@@ -151,7 +151,7 @@ export default function Individualcard({
 
   return (
     <>
-      <Card bg="white" style={{ flex: "1"}}>
+     <Card bg="white" style={{ flex: "1" }}>
         <Card.Header
           style={{
             textAlign: "center",
@@ -160,9 +160,11 @@ export default function Individualcard({
             fontStyle: "normal",
             backgroundColor: "black",
             color: "white",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
           }}
         >
-          {" "}
           {station.station_name.split(" - Tesla Supercharger")}
         </Card.Header>
 
@@ -182,38 +184,47 @@ export default function Individualcard({
               />
             )}
           </GoogleMap>
-          {"\u00A0"}
-          <Card.Title>{`${station.street_address}`}</Card.Title>
-          <Card.Title>{`${station.city}, ${station.state} ${station.zip}`}</Card.Title>
-          
-          {/* {console.log(station)} */}
           <br></br>
-          <Card.Subtitle>
-            <span style={{ fontSize: "16px", fontWeight: "bold" }}>Access</span>
-            {": "}
-            {station.access_days_time}
-          </Card.Subtitle>
-          <Card.Subtitle>
-            <br></br>
-            <span style={{ fontSize: "16px", fontWeight: "bold" }}>
-              Distance
-            </span>
-            {": "}
-            {station.distance.toFixed(2)} Miles
-          </Card.Subtitle>
-          <br></br>
-          <Card.Subtitle>
-            <span style={{ fontSize: "16px", fontWeight: "bold" }}>
-              Pricing
-            </span>
-            {": "}
-            {station.ev_pricing}
-          </Card.Subtitle>
-          <br></br>
+          <div>
+            <Card.Title>{`${station.street_address}`}</Card.Title>
+            <Card.Title>{`${station.city}, ${station.state} ${station.zip}`}</Card.Title>
+
+            <br />
+            <Card.Subtitle>
+              <span style={{ fontSize: "16px", fontWeight: "bold" }}>
+                Access
+              </span>
+              : {station.access_days_time}
+            </Card.Subtitle>
+            <Card.Subtitle>
+              <br />
+              <span style={{ fontSize: "16px", fontWeight: "bold" }}>
+                Distance
+              </span>
+              : {station.distance.toFixed(2)} Miles
+            </Card.Subtitle>
+            <br />
+
+            <Card.Subtitle>
+              <span style={{ fontSize: "16px", fontWeight: "bold" }}>
+                Pricing
+              </span>
+              : {station.ev_pricing}
+            </Card.Subtitle>
+          </div>
+        </Card.Body>
+
+        <div
+          style={{
+            marginTop: "auto",
+            marginBottom: "1em",
+            marginLeft: "1em",
+            marginRight: "1em",
+          }}
+        >
           <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
               <Accordion.Header>
-                {" "}
                 <span
                   style={{
                     fontSize: "16px",
@@ -231,8 +242,8 @@ export default function Individualcard({
               </Accordion.Header>
               <Accordion.Body>
                 {station.comments && station.comments.length > 0 ? (
-                  station.comments.map((comment) => (
-                    <Alert variant="dark">
+                  station.comments.map((comment, index) => (
+                    <Alert key={index} variant="dark">
                       <Col xs={2} md={2}></Col>
                       <Image src="./thumbnail.png" circle />
                       {"\u00A0" + "\u00A0"}
@@ -242,8 +253,6 @@ export default function Individualcard({
                 ) : (
                   <Alert variant="danger">No Reviews Yet</Alert>
                 )}
-                <br></br>
-                <br></br>
                 <div className="d-grid gap-2">
                   <Button
                     variant="dark"
@@ -257,19 +266,21 @@ export default function Individualcard({
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <br></br>
+        </div>
 
-          <div className="d-grid gap-2">
-            <Button
-              variant="dark"
-              onClick={(e) =>
-                handleGetDirections(stationLatitude, stationLongitude)
-              }
-            >
-              Get Directions
-            </Button>{" "}
-          </div>
-        </Card.Body>
+        <div
+          className="d-grid gap-2"
+          style={{ marginLeft: "1em", marginRight: "1em", marginBottom: "1em" }}
+        >
+          <Button
+            variant="dark"
+            onClick={(e) =>
+              handleGetDirections(stationLatitude, stationLongitude)
+            }
+          >
+            Get Directions
+          </Button>{" "}
+        </div>
       </Card>
 
       <Modal
