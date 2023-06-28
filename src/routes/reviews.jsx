@@ -1,8 +1,12 @@
+import React from 'react';
+import Newstation from "../components/Newstation"
+
+
 export default function Reviews() {
     return (
        <>
 
-       <h1>reviews page</h1>
+<Newstation />
        
        
        
