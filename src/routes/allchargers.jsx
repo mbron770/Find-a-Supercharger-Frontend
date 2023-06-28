@@ -33,12 +33,13 @@ export default function AllChargers() {
 
   return (
     <>
-      <Carddisplay
+      { currentLocation && 
+        <Carddisplay
         stations={stations}
         currentLocation={currentLocation}
         isLocationLoaded={isLocationLoaded}
         setStations={setStations}
-      />
+      />}
     </>
   );
 }

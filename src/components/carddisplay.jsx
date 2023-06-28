@@ -18,19 +18,19 @@ function CardDisplay({
   isLocationLoaded,
   setStations,
 }) {
-  const a = { ...currentLocation };
+  // const a = { ...currentLocation };
   const [address, setAddress] = useState("");
-  const [lat, setLat] = useState(a.lat);
-  const [lng, setLng] = useState(a.lng);
+  const [lat, setLat] = useState(currentLocation.lat);
+  const [lng, setLng] = useState(currentLocation.lng);
 
-  useEffect(() => {
-    if (currentLocation) {
-      setLat(currentLocation.lat);
-      setLng(currentLocation.lng);
-    }
-  }, [currentLocation]);
+  // useEffect(() => {
+  //   if (currentLocation) {
+  //     setLat(currentLocation.lat);
+  //     setLng(currentLocation.lng);
+  //   }
+  // }, [currentLocation]);
 
-  console.log(address);
+  //console.log(address);
 
   // useEffect(() => {
   //   if (address) {
