@@ -7,7 +7,7 @@ const URL = 'http://localhost:3000/fuel_stations';
 function Map({stations}) {
   const containerStyle = {
     width: "100vw",
-    height: "96vh",
+    height: "100vh",
   };
 
   const [currentLocation, setCurrentLocation] = useState(null);

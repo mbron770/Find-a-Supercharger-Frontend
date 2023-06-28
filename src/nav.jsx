@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 export default function Nav() {
   return (
     <nav>
-      <Navbar expand="lg" className="bg-body-tertiary" >
+      <Navbar expand="lg" className="bg-body-tertiary fixed-top" >
         <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -29,10 +29,11 @@ export default function Nav() {
             <img src="./allchargers.png" alt="Tesla logo" />
           </NavLink>
           <NavLink to="reviews">
-            <img src="./reviews.png" alt="Tesla logo" />
+            <img src="./addacharger.png" alt="Tesla logo" />
           </NavLink>
         </Container>
       </Navbar>
+      
     </nav>
   );
 }

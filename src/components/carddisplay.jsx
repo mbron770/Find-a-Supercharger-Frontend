@@ -32,7 +32,7 @@ function CardDisplay({
         };
       })
       .sort((a, b) => a.distance - b.distance)
-      .slice(0, 30);
+      .slice(0, 32);
   };
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -59,8 +59,7 @@ function CardDisplay({
 
   return (
     <div>
-      <br></br>
-
+      <br></br><br></br><br></br>
       <Row
         xs={1}
         md={4}

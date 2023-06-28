@@ -14,14 +14,6 @@ import { useState, useEffect } from 'react';
 
 const URL = 'http://localhost:3000/fuel_stations';
 
-// const [stations, setStations] = useState([]);
-
-// useEffect(() => {
-//   fetch(URL)
-//     .then(response => response.json())
-//     .then(data => setStations(data));
-// }, []);
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -38,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'reviews',
-        element: <Reviews />,
+        element: <Reviews />
       },
     ],
   },
@@ -47,11 +39,12 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LoadScript googleMapsApiKey="AIzaSyDn7oQa4QsdEXc9GoIv5as8gMS8_uF73_4">
+    <LoadScript googleMapsApiKey="AIzaSyDn7oQa4QsdEXc9GoIv5as8gMS8_uF73_4"
+    libraries={['maps', 'places']}
+    >
       <RouterProvider router={router} />
     </LoadScript>
   </React.StrictMode>
 );
 
 reportWebVitals();
-
