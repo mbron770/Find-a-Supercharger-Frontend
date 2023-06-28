@@ -151,6 +151,8 @@ function CardDisplay({
                 setStations={setStations}
                 stationLatitude={station.latitude}
                 stationLongitude={station.longitude}
+                lat={lat}
+                lng={lng}
               />
             </div>
           </Col>

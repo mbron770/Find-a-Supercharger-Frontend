@@ -18,6 +18,8 @@ export default function Individualcard({
   setStations,
   stationLatitude,
   stationLongitude,
+  lat,
+  lng
 }) {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
@@ -77,7 +79,7 @@ export default function Individualcard({
 
   function handleGetDirections(stationLatitude, stationLongitude) {
     if (currentLocation) {
-      const origin = `${currentLocation.lat},${currentLocation.lng}`;
+      const origin = `${lat},${lng}`;
       const destination = `${stationLatitude},${stationLongitude}`;
       const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
       window.open(directionsUrl, "_blank");
