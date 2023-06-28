@@ -3,6 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import Individualcard from "./Individualcard";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useState, useEffect } from "react";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import Search from "./search";
 
 function CardDisplay({
   stations,
@@ -10,9 +15,15 @@ function CardDisplay({
   isLocationLoaded,
   setStations,
 }) {
+  const a ={...currentLocation}
+  const [address, setAddress] = useState('');
+  const [lat,setLat] = useState(a.lat)
+  const [lng,setLng] = useState(a.lng)
+
+
   const calculateDistances = () => {
-    const yourLatitude = currentLocation.lat;
-    const yourLongitude = currentLocation.lng;
+    const yourLatitude = lat;
+    const yourLongitude = lng;
 
     return stations
       .map((station) => {
@@ -57,9 +68,17 @@ function CardDisplay({
   const closestStations =
     isLocationLoaded && currentLocation ? calculateDistances() : [];
 
+  
+
   return (
     <div>
       <br></br><br></br><br></br>
+      <Search currentLocation = {currentLocation} 
+      setLat = {setLat}
+      setLng = {setLng}
+      address={address} 
+      setAddress = {setAddress}/>
+      <br></br>
       <Row
         xs={1}
         md={4}
@@ -86,6 +105,8 @@ function CardDisplay({
                 setStations={setStations}
                 stationLatitude={station.latitude}
                 stationLongitude={station.longitude}
+                lat = {lat}
+                lng = {lng}
               />
             </div>
           </Col>

@@ -14,6 +14,7 @@ function Map({stations}) {
   const [selectedStation, setSelectedStation] = useState(null);
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
+  const [center, setCenter] = useState(currentLocation);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -79,6 +80,8 @@ function Map({stations}) {
   }
 
   return (
+    <>
+    
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={currentLocation}
@@ -125,6 +128,8 @@ function Map({stations}) {
         </InfoWindowF>
       )}
     </GoogleMap>
+    </>
+    
   );
 }
 

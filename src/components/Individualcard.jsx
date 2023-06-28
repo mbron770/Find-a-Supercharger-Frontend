@@ -18,6 +18,8 @@ export default function Individualcard({
   setStations,
   stationLatitude,
   stationLongitude,
+  lat, 
+  lng,
 }) {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
@@ -60,8 +62,8 @@ export default function Individualcard({
     }
   }, [selectedStation, currentLocation]);
 
-  const i = [stationLatitude, stationLongitude];
-  console.log(i);
+  // const i = [stationLatitude, stationLongitude];
+  // console.log(i);
 
   function handleDirectionsResponse(response, status) {
     if (status === "OK") {
@@ -76,12 +78,10 @@ export default function Individualcard({
   }
 
   function handleGetDirections(stationLatitude, stationLongitude) {
-    if (currentLocation) {
-      const origin = `${currentLocation.lat},${currentLocation.lng}`;
+    const origin = `${lat},${lng}`;
       const destination = `${stationLatitude},${stationLongitude}`;
       const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
       window.open(directionsUrl, "_blank");
-    }
   }
 
   function handleCommentChange(event) {
@@ -147,11 +147,11 @@ export default function Individualcard({
     lng: stationLongitude,
   };
 
-  console.log(desitantionMarkers);
+  // console.log(desitantionMarkers);
 
   return (
     <>
-      <Card bg="white" style={{ flex: "1" }}>
+      <Card bg="white" style={{ flex: "1"}}>
         <Card.Header
           style={{
             textAlign: "center",
@@ -186,7 +186,7 @@ export default function Individualcard({
           <Card.Title>{`${station.street_address}`}</Card.Title>
           <Card.Title>{`${station.city}, ${station.state} ${station.zip}`}</Card.Title>
           
-          {console.log(station)}
+          {/* {console.log(station)} */}
           <br></br>
           <Card.Subtitle>
             <span style={{ fontSize: "16px", fontWeight: "bold" }}>Access</span>
