@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import Individualcard from "./Individualcard";
+import Individualcard from "./individualcard";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
