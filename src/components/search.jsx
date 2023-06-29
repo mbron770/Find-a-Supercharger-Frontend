@@ -55,7 +55,7 @@ export default function Search({
             width: "60vh",
             position: "fixed",
 
-            top: "9.75%",
+            top: "16%",
             left: "35%",
             zIndex: "9999",
             borderRadius: "25px",
@@ -82,7 +82,8 @@ export default function Search({
                     style={{
                       width: "60vh",
                       position: "fixed",
-                      bottom: "91%",
+                      top: "9.75%",
+                      bottom: "85%",
                       left: "35%",
 
                       backgroundColor: "rgba(211, 211, 211, 0.8)",
