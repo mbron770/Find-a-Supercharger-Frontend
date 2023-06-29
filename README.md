@@ -1,3 +1,59 @@
+TeslaSC is a desktop web application that helps users find Tesla supercharging stations near them. Initially, a map of nearby chargers is displayed relative to the user's current location which provides an info card with google Maps directions. Users can navigate to the All Chargers page to see a detailed list of chargers nearby and find chargers for a different location. Users can also add new charging stations in the add chargers page. 
+
+
+Using this website: 
+this site is available at teslaSC.net
+
+**Repo cloning directions. **
+
+-git clone 
+
+- open index.js and edit line 45 to contain your Google API key
+googleMapsApiKey="PASTE YOUR GOOGLE API KEY HERE"
+Nothing will work without a valid google api key!
+
+- npm i
+- npm start 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
