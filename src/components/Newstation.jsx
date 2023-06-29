@@ -80,7 +80,7 @@ function Newstation() {
       pricing !== "" &&
       stationName !== ""
     ) {
-      fetch("http://localhost:3000/fuel_stations", {
+      fetch('https://find-a-supercharger-backend.onrender.com/fuel_stations', {
         method: "POST",
         headers: {
           "Content-type": "application/json",
