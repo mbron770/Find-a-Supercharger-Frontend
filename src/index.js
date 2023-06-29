@@ -12,7 +12,7 @@ import AllChargers from './routes/allchargers';
 import Reviews from './routes/reviews';
 import { useState, useEffect } from 'react';
 
-const URL = 'http://localhost:3000/fuel_stations';
+const URL = 'https://find-a-supercharger-backend.onrender.com/fuel_stations'
 
 const router = createBrowserRouter([
   {
