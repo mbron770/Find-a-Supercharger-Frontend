@@ -40,7 +40,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <LoadScript 
-    googleMapsApiKey={googleMapsApiKey}
+    googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
     //googleMapsApiKey
     
     // ="AIzaSyDn7oQa4QsdEXc9GoIv5as8gMS8_uF73_4"
