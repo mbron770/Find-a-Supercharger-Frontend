@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindowF } from "@react-google-maps/api";
 
 
-const URL = 'http://localhost:3000/fuel_stations';
+const URL = 'https://find-a-supercharger-backend.onrender.com/fuel_stations'
 
 function Map({stations}) {
   const containerStyle = {
