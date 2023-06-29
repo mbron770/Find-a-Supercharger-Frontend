@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import { GoogleMap, Marker, InfoWindowF } from "@react-google-maps/api";
 
-const URL = "http://localhost:3000/fuel_stations";
+const URL = 'https://find-a-supercharger-backend.onrender.com/fuel_stations'
 
 export default function Individualcard({
   station,
