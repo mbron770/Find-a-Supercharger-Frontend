@@ -72,7 +72,7 @@ function CardDisplay({
 
   return (
     <div>
-      <br></br><br></br><br></br>
+      <br></br><br></br><br></br><br></br>
       <Search currentLocation = {currentLocation} 
       setLat = {setLat}
       setLng = {setLng}

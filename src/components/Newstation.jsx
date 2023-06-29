@@ -66,9 +66,13 @@ function Newstation() {
       street_address: address.split(",")[0],
       country: "US",
       zip: zip,
-      comments: review,
       ev_pricing: pricing,
     };
+
+    if (typeof review === 'string' && review.trim() !== "" ) {
+      newStation.comments = [review];
+    }
+  
     if (
       city !== "" &&
       state !== "" &&
@@ -297,6 +301,7 @@ function Newstation() {
                   value={address}
                   onChange={handleAddressChange}
                   onSelect={handleAddressSelect}
+                  searchOptions={{ types: ['address'], componentRestrictions: { country: 'us' } }}
                   required
                   isInvalid
                 >

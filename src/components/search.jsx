@@ -66,6 +66,7 @@ export default function Search({
               value={address}
               onChange={handleAddressChange}
               onSelect={handleAddressSelect}
+              searchOptions={{ types: ['address'], componentRestrictions: { country: 'us' } }}
             >
               {({
                 getInputProps,
@@ -76,7 +77,7 @@ export default function Search({
                 <div>
                   <Form.Control
                     {...getInputProps({
-                      placeholder: "Find a Charging Station...",
+                      placeholder: "Find a Charging Station Nearby...",
                       size: "md",
                     })}
                     style={{
