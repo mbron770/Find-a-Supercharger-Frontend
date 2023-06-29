@@ -3,8 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import Individualcard from "./individualcard";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -18,28 +16,10 @@ function CardDisplay({
   isLocationLoaded,
   setStations,
 }) {
-  // const a = { ...currentLocation };
+
   const [address, setAddress] = useState("");
   const [lat, setLat] = useState(currentLocation.lat);
   const [lng, setLng] = useState(currentLocation.lng);
-
-  // useEffect(() => {
-  //   if (currentLocation) {
-  //     setLat(currentLocation.lat);
-  //     setLng(currentLocation.lng);
-  //   }
-  // }, [currentLocation]);
-
-  //console.log(address);
-
-  // useEffect(() => {
-  //   if (address) {
-  //     setLat(currentLocation.lat);
-  //     setLng(currentLocation.lng);
-  //   }
-  // },[address])
-
-  //console.log (lat,'    ',lng)
 
   const calculateDistances = () => {
     const yourLatitude = lat;
@@ -136,7 +116,7 @@ function CardDisplay({
         }}
       >
         {closestStations.map((station) => (
-          <Col key={station}>
+          <Col key={uuidv4()}>
             <div
               style={{
                 display: "flex",

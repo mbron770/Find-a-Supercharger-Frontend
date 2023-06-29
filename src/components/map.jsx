@@ -10,6 +10,13 @@ function Map({stations}) {
     height: "100vh",
   };
 
+  const usaBounds = {
+    north: 49.3457868,
+    south: 24.396308,
+    west: -125.000000,
+    east: -66.934570,
+  };
+
   const [currentLocation, setCurrentLocation] = useState(null);
   const [selectedStation, setSelectedStation] = useState(null);
   const [distance, setDistance] = useState(null);
@@ -83,6 +90,12 @@ function Map({stations}) {
       mapContainerStyle={containerStyle}
       center={currentLocation}
       zoom={13}
+      options={{
+      restriction: {
+        latLngBounds: usaBounds,
+        strictBounds: false,
+      },
+      }}
     >
       {currentLocation && (
         <Marker

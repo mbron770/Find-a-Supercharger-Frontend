@@ -39,12 +39,9 @@ function Newstation() {
       const selectedLocation = await getLatLng(results[0]);
       const { lat, lng } = selectedLocation;
       console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-      //console.log (selectedAddress)
       setLat(lat);
       setLng(lng);
       const addressArr = selectedAddress.split(", ");
-      // console.log (addressArr[addressArr.length-2])
-      // console.log (addressArr[addressArr.length-3])
       setCity(addressArr[addressArr.length - 3]);
       setState(addressArr[addressArr.length - 2]);
     } catch (error) {
@@ -296,6 +293,7 @@ function Newstation() {
                   onSelect={handleAddressSelect}
                   required
                   isInvalid
+                  searchOptions={{ types: ['address'], componentRestrictions: { country: 'us' } }}
                 >
                   {({
                     getInputProps,
