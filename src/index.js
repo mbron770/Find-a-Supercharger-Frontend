@@ -41,9 +41,8 @@ root.render(
   <React.StrictMode>
     <LoadScript 
     googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-    //googleMapsApiKey
-    
-    // ="AIzaSyDn7oQa4QsdEXc9GoIv5as8gMS8_uF73_4"
+
+    //googleMapsApiKey="PASTE YOUR GOOGLE API KEY HERE"
     libraries={['maps', 'places']}
     >
       <RouterProvider router={router} />
