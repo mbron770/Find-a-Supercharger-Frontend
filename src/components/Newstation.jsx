@@ -66,16 +66,13 @@ function Newstation() {
       street_address: address.split(",")[0],
       country: "US",
       zip: zip,
-      comments: review,
       ev_pricing: pricing,
     };
-    if (
-      city !== "" &&
-      state !== "" &&
-      address !== "" &&
-      pricing !== "" &&
-      stationName !== ""
-    ) {
+    if (typeof review === 'string' && review.trim() !== "" ) {
+      newStation.comments = [review];
+    }
+
+    if (city !== "" && state !== "" && address !== "" && pricing !== "" && stationName !== "") {
       fetch("http://localhost:3000/fuel_stations", {
         method: "POST",
         headers: {
@@ -469,7 +466,11 @@ function Newstation() {
               onChange={(e) => setChargerType(e.target.value)}
               style={{ width: "100%" }}
               required={!!chargerType.length}
-              isInvalid={!chargerType}
+              isInvalid={
+                chargerType.length > 0 &&
+                !isNaN(parseFloat(chargerType)) &&
+                isFinite(chargerType)
+              }
             />
             <Form.Control.Feedback type="invalid">
               Please Enter a Type
