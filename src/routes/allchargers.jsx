@@ -3,7 +3,7 @@ import { useEffect,useState } from "react";
 
 
 
-const URL = 'http://localhost:3000/fuel_stations';
+const URL = 'https://find-a-supercharger-backend.onrender.com/fuel_stations'
 
 export default function AllChargers() {
     const [stations, setStations] = useState([]);
