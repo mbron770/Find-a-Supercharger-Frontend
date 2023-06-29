@@ -6,8 +6,19 @@ export default function Search({ handleAddressChange, handleAddressSelect, addre
   console.log(address);
   return (
     <>
-      <Form.Group controlId="addressCityStateZip">
-        <Form.Label>Address</Form.Label>
+    <div>
+      <br></br>
+      <Form.Group
+        controlId="addressCityStateZip"
+        style={{
+          width: "60vh",
+          position: "fixed",
+          top: "16%",
+          left: "35%",
+          zIndex: "9999",
+          borderRadius: "25px",
+        }}
+      >
         <div>
           <PlacesAutocomplete
             value={address}
@@ -15,20 +26,42 @@ export default function Search({ handleAddressChange, handleAddressSelect, addre
             onSelect={handleAddressSelect}
             searchOptions={{ types: ['address'], componentRestrictions: { country: 'us' } }}
           >
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
               <div>
                 <Form.Control
                   {...getInputProps({
-                    placeholder: 'Address',
-                    size: 'sm',
+                    placeholder: "Find a Charging Station Nearby...",
+                    size: "md",
                   })}
-                  style={{ width: '50%' }}
+                //   style={{
+                //     width: "60vh",
+                //     position: "fixed",
+                //     top: "9.75%",
+                //     bottom: "85%",
+                //     left: "35%",
+
+                //     backgroundColor: "rgba(211, 211, 211, 0.8)",
+                //     zIndex: "9999",
+                //     borderRadius: "25px",
+                //   }}
+                  style={{ 
+                    position: "fixed", 
+                    width: "60vh", 
+                    top: "7.5vh", 
+                    zIndex: "9999", 
+                    backgroundColor: "rgba(211, 211, 211, 0.8)",
+                    borderRadius: "25px"}}
                 />
                 <div>
                   {loading && <div>Loading...</div>}
                   {suggestions.map((suggestion) => {
                     const style = {
-                      backgroundColor: suggestion.active ? '#e2e2e2' : '#fff',
+                      backgroundColor: suggestion.active ? "#e2e2e2" : "#fff",
                     };
                     return (
                       <div
@@ -45,6 +78,7 @@ export default function Search({ handleAddressChange, handleAddressSelect, addre
           </PlacesAutocomplete>
         </div>
       </Form.Group>
-    </>
+    </div>
+  </>
   );
 }
