@@ -90,11 +90,3 @@ Nothing will work without a valid google api key!
 ## Credits
 
 The **Tesla Supercharger Finder** project is created and maintained by **Mordechai Bronfin** (2023).
-
-
-
-
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
