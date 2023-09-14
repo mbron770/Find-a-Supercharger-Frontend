@@ -1,19 +1,48 @@
-TeslaSC is a desktop web application that helps users find Tesla supercharging stations near them. Initially, a map of nearby chargers is displayed relative to the user's current location which provides an info card with google Maps directions. Users can navigate to the All Chargers page to see a detailed list of chargers nearby and find chargers for a different location. Users can also add new charging stations in the add chargers page. 
+ # [Tesla Super Charger Finder](https://www.teslasc.net/)
+
+ <h4 align="center">A Tesla Super Charger Station geolocator</h1>
+
+ <a href="https://www.teslasc.net/">Live App
+ 
+
+## Summary
+This project is a desktop web application that plots Tesla Supercharger Stations throughout the United States on a custom map interface, utilizing Google Maps and the US Department of Energy Alternative Fuel Stations API with React. A list of Charging Stations is generated near the user's location and enables nationwide search. Turn-by-turn navigation is implemented for users to their chosen or nearest Tesla Supercharger Station.
+
+## Languages and Dependencies
+
+* **[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)**
+* **[React](https://react.dev/)**
+* **[Google Maps API]()**
+* **[US Department of Energy Alternative Fuel Stations API]()**
 
 
-Using this website: 
-this site is available at teslaSC.net
 
-**Repo cloning directions. **
+## Project Directory Hierarchy
+Upon successful setup (see **Setup Instructions**), you should see the following project directory hierarchy.
 
--git clone 
 
-- open index.js and edit line 45 to contain your Google API key
+## Setup Instructions
+
+To launch this project on your own local development environment, please go through the following instructions carefully:
+
+1. Clone the repository into your local environment.
+2. Open the directory in your favorite code editor.
+3. Run the following command in the terminal to open the app on port 3000 in your favorite browser.
+
+
+```console 
+npm i
+```
+
+```console 
+npm start
+```
+
+4. - open index.js and edit line 45 to contain your Google API key
 googleMapsApiKey="PASTE YOUR GOOGLE API KEY HERE"
 Nothing will work without a valid google api key!
 
-- npm i
-- npm start 
+
 
 
 
