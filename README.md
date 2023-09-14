@@ -22,7 +22,43 @@ Upon successful setup (see **Setup Instructions**), you should see the following
 ```
 ├── node_modules
 ├── .gitignore
-
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── addacharger.png
+│   ├── allchargers.png
+│   ├── favicon.ico
+│   ├── homepage.png
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── reviews.png
+│   ├── robots.txt
+│   └── thumbnail.png
+└── src
+    ├── App.css
+    ├── components
+    │   ├── Individualcard.jsx
+    │   ├── Newstation.jsx
+    │   ├── app.jsx
+    │   ├── carddisplay.jsx
+    │   ├── map.jsx
+    │   ├── reviewform.jsx
+    │   └── search.jsx
+    ├── error.jsx
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── nav.jsx
+    ├── reportWebVitals.js
+    ├── routes
+    │   ├── allchargers.jsx
+    │   ├── reviews.jsx
+    │   └── root.jsx
+    └── setupTests.js
+```
 
 
 ## Project Directory Hierarchy
