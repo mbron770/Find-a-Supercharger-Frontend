@@ -71,7 +71,7 @@ To launch this project on your own local development environment, please go thro
 
 1. Clone the repository into your local environment.
 2. Open the directory in your favorite code editor.
-3. Run the following command in the terminal to open the app on port 3000 in your favorite browser.
+3. Run the following commands in the terminal to open the app on port 3000 in your favorite browser.
 
 
 ```console 
